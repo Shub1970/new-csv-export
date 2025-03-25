@@ -10,8 +10,8 @@ import {
   Alert,
 } from '@strapi/design-system';
 import { Check } from '@strapi/icons';
-import { useNotification, useFetchClient } from '@strapi/helper-plugin';
-import pluginId from '../../pluginId';
+import { useNotification, useFetchClient } from '@strapi/strapi/admin';
+import { PLUGIN_ID } from '../pluginId';
 
 const Settings = () => {
   const [contentTypes, setContentTypes] = useState([]);

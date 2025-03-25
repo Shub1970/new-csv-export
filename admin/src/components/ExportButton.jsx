@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@strapi/design-system';
 import { Download } from '@strapi/icons';
-import { useFetchClient } from '@strapi/helper-plugin';
-import pluginId from '../../pluginId';
+import { useFetchClient } from '@strapi/strapi/admin';
+import { PLUGIN_ID } from '../pluginId';
 
 const ExportButton = ({ contentType }) => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -11,7 +11,7 @@ const ExportButton = ({ contentType }) => {
   useEffect(() => {
     const checkSettings = async () => {
       try {
-        const { data: settings } = await get(`/${pluginId}/settings`);
+        const { data: settings } = await get(`/${PLUGIN_ID}/settings`);
         setIsEnabled(settings.contentTypes.includes(contentType));
       } catch (err) {
         console.error('Failed to fetch CSV export settings:', err);
@@ -27,7 +27,7 @@ const ExportButton = ({ contentType }) => {
 
   const handleExport = async () => {
     try {
-      window.location.href = `/api/${pluginId}/csv/${contentType}`;
+      window.location.href = `/api/${PLUGIN_ID}/csv/${contentType}`;
     } catch (err) {
       console.error('Failed to export CSV:', err);
     }
